@@ -1,11 +1,15 @@
 /*
  * Create a list that holds all of your cards
  */
+let card = document.getElementsByClassName("card");
+let cards = [...card]
+console.log(cards);
+  
+/* 
+ * Display the cards on the page */
+ 
 
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
+ /*   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */

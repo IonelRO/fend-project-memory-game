@@ -3,8 +3,7 @@
  */
 let card = document.getElementsByClassName("card");
 let cards = [...card]
-console.log(cards);
-  
+ 
 /* 
  * Display the cards on the page */
  
@@ -13,7 +12,8 @@ console.log(cards);
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-
+ shuffledCards = [...shuffle(cards)]
+ 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;

@@ -79,7 +79,16 @@ h1 {
 }
 
 .deck .card.open {
-    transform: rotateY(0);
+    animation-name: stretch;
+  -webkit-backface-visibility: visible !important;
+  backface-visibility: visible !important;
+  animation-duration: 1.5s; 
+  animation-timing-function: ease-out; 
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+	transform: rotateY(0);
     background: #02b3e4;
     cursor: default;
 }
@@ -90,25 +99,30 @@ h1 {
 
 .deck .card.match {
     cursor: default;
-    background: #02ccba;
-    font-size: 33px;
-}
-.deck .card.unmatched {
-  height: 125px;
-  width: 125px;
-  margin: 0 auto;
-  background-color: red;
-  border-radius: 8%;
-  animation-name: stretch;
+	animation-name: stretch;
+  -webkit-backface-visibility: visible !important;
+  backface-visibility: visible !important;
   animation-duration: 1.5s; 
   animation-timing-function: ease-out; 
   animation-delay: 0;
   animation-direction: alternate;
-  animation-iteration-count: 4;
   animation-fill-mode: forwards;
   animation-play-state: running;
-  -webkit-backface-visibility: visible;
-  backface-visibility: visible;
+    background: #02ccba;
+    font-size: 33px;
+}
+.deck .card.unmatched {
+  animation-name: stretch;
+  -webkit-backface-visibility: visible !important;
+  backface-visibility: visible !important;
+  animation-duration: 1.5s; 
+  animation-timing-function: ease-out; 
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  background: #ff4d4d;
+  font-size: 33px;
 }
 
 .deck .card.selected {
@@ -145,16 +159,13 @@ pointer-events: none;
 *Annimation keyframes
 */
 @keyframes stretch {
-  100% {
-    transform: scale(1.5);
-    background-color: red;
-    border-radius: 8%;
+  from {
+    transform: scale3d(1, 1, 1);
   }
   50% {
-    background-color: orange;
+    transform: scale3d(1.2, 1.2, 1.2);
   }
-  100% {
-    transform: scale(1.1);
-    background-color: yellow;
-  }
+  to {
+    transform: scale3d(1, 1, 1);
+}
 }

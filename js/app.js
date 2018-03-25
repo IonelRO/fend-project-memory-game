@@ -1,9 +1,13 @@
 /*
  * Create a list that holds all of your cards
  */
-let card = document.getElementsByClassName("card");
-let cards = [...card]
- 
+
+let cards = Array.from(document.getElementsByClassName("card"));
+console.log(cards);
+	      
+// deck of all cards in game
+const deck = document.getElementsByClassName("deck");
+
 /* 
  * Display the cards on the page */
  
@@ -11,10 +15,24 @@ let cards = [...card]
  /*   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
- */
- shuffledCards = [...shuffle(cards)]
- 
-// Shuffle function from http://stackoverflow.com/a/2450976
+*/
+ // @description function to start play or when the game restart 
+ // @description shuffles cards when page loads
+document.body.onload = startGame();
+function startGame(){
+    // shuffle deck
+    cards = shuffle(cards);
+    // remove all exisiting classes from each card
+    for (var i = 0; i < cards.length; i++){
+      
+        [].forEach.call(cards, function(item) {
+            deck.innerHTML = "";
+			
+        });
+        cards[i].classList.remove("show", "open", "match", "unmatched");
+    }
+}
+ // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 

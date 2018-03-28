@@ -74,9 +74,9 @@ function shuffle(array) {
 // @description add opened cards to OpenedCards list and check if cards are match or not
 function cardOpen() {
     openedCards.push(this);
-    let number = openedCards.length;
-	number === 2? openedCards[0].innerHTML === openedCards[1].innerHTML? matched():unmatched():"";
-	
+	openedCards[0].classList.add("selected");
+	let number = openedCards.length;
+	number === 2 ? openedCards[0].innerHTML === openedCards[1].innerHTML? matched():unmatched():"";
 	};
 	// @description when cards match
 function matched(){
@@ -106,6 +106,7 @@ function unmatched(){
 let displayCard = function (){
     this.classList.toggle("open");
     this.classList.toggle("show");
+	
  };
 
 
@@ -115,5 +116,5 @@ for (var i = 0; i < cards.length; i++){
     card.addEventListener("click", displayCard);
     card.addEventListener("click", cardOpen);
    };
-   
+ 
    

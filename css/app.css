@@ -33,6 +33,10 @@ h1 {
     font-weight: 300;
 }
 
+.restart {
+  display: inline-block;
+  cursor: pointer;
+}
 /*
  * Styles for the deck of cards
  */
@@ -64,7 +68,7 @@ h1 {
           justify-content: space-evenly;
 }
 
-.deck .card {
+.card {
     height: 125px;
     width: 125px;
     background: #2e3d49;
@@ -78,7 +82,7 @@ h1 {
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
-.deck .card.open {
+.open {
     transform: rotateY(0);
     background: #02b3e4;
     cursor: default;
@@ -91,11 +95,11 @@ h1 {
    animation-fill-mode: both;
 }
 
-.deck .card.show {
+.show {
     font-size: 33px;
 }
 
-.deck .card.match {
+.match {
     cursor: default;
 	animation-name: stretch;
   -webkit-backface-visibility: visible !important;
@@ -109,7 +113,7 @@ h1 {
     background: #02ccba;
     font-size: 33px;
 }
-.deck .card.unmatched {
+.unmatched {
   cursor: default;
   animation-name: figure;
   -webkit-backface-visibility: visible !important;
@@ -124,11 +128,15 @@ h1 {
   font-size: 33px;
 }
 
-.deck .card.selected {
+.selected {
 pointer-events: none;
 opacity: 0.9;
 }
+
+.no-events {
+  pointer-events: none;
 }
+
 /*
  * Styles for the Score Panel
  */

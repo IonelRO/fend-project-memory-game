@@ -4,7 +4,8 @@
 
 let cards = Array.from(document.getElementsByClassName("card"));
 console.log(cards);
-     
+
+    
 // deck of all cards in game
 const deck = document.querySelector('.deck');
 
@@ -14,8 +15,7 @@ let openedCards = [];
 
 // declaring variable of matchedCards
 let matchedCard = document.getElementsByClassName("match");
-
-
+	
 /* 
  * Display the cards on the page */
  
@@ -28,22 +28,21 @@ let matchedCard = document.getElementsByClassName("match");
  // @description shuffles cards when page loads
 document.body.onload = startGame();
 function startGame(){
-    // shuffle deck
+    // @shuffle deck
     cards = shuffle(cards)};
-    // remove all exisiting classes from each card
-    for (var i = 0; i < cards.length; i++){
-      
-        [].forEach.call(cards, function(item) {
+    // @remove all exisiting classes from each card
+	 for (var i = 0; i < cards.length; i++){
+            [].forEach.call(cards, function(item) {
             deck.innerHTML = "";
-			[].forEach.call(cards, function(item) {
+            [].forEach.call(cards, function(item) {
             deck.appendChild(item);
-			
+            
         });
         });
         cards[i].classList.remove("show", "open", "match", "unmatched");
     };
-	
-	
+    
+ 
 
  // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -60,6 +59,12 @@ function shuffle(array) {
     return array;
 };
 
+// @description toggles open and show class to display cards
+let displayCard = function (){
+    this.classList.toggle("open");
+    this.classList.toggle("show");
+	this.classList.toggle("selected");
+ };
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -74,47 +79,71 @@ function shuffle(array) {
 // @description add opened cards to OpenedCards list and check if cards are match or not
 function cardOpen() {
     openedCards.push(this);
-	openedCards[0].classList.add("selected");
 	let number = openedCards.length;
 	number === 2 ? openedCards[0].innerHTML === openedCards[1].innerHTML? matched():unmatched():"";
 	};
 	// @description when cards match
 function matched(){
-    openedCards[0].classList.add("match", "selected");
-    openedCards[1].classList.add("match", "selected");
-    openedCards[0].classList.remove("show", "open", "no-event", "selected");
-    openedCards[1].classList.remove("show", "open", "no-event", "selected");
-    openedCards = [];
+    openedCards[0].classList.add( "selected", "match");
+    openedCards[1].classList.add("selected", "match");
+    openedCards[0].classList.remove("show", "open", "no-event");
+    openedCards[1].classList.remove("show", "open", "no-event");
+   	openedCards = [];
+	// @Game over,open modal 
+	matchedCard.length===16?openModal():"";
 }
 
 
-// description when cards don't match
+	// @description when cards don't match
 function unmatched(){
     openedCards[0].classList.add("unmatched");
     openedCards[1].classList.add("unmatched");
 	openedCards[0].classList.remove("show", "open", "no-event", "selected");
     openedCards[1].classList.remove("show", "open", "no-event", "selected");
-   // disable();
+   // @disable();
     setTimeout(function(){
         openedCards[0].classList.remove("show", "open", "no-event","unmatched");
         openedCards[1].classList.remove("show", "open", "no-event","unmatched");
       //  enable();
         openedCards = [];
-    },1100);
+    },300);
 }
-// @description toggles open and show class to display cards
-let displayCard = function (){
-    this.classList.toggle("open");
-    this.classList.toggle("show");
-	
- };
 
 
-// loop to add event listeners to each card
+	// @loop to add event listeners to each card
 for (var i = 0; i < cards.length; i++){
-    card = cards[i];
-    card.addEventListener("click", displayCard);
-    card.addEventListener("click", cardOpen);
+   card = cards[i];
+   card.addEventListener("click", displayCard);
+   card.addEventListener("click", cardOpen);
    };
  
-   
+ // Modal function
+ 
+function openModal(){
+   // Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+    modal.style.display = "block";
+
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+}
+
+

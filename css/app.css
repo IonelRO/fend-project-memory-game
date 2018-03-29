@@ -55,20 +55,7 @@ h1 {
     margin: 0 0 3em;
 }
 
-.grid {
-  max-width: 960px;
-  margin: 0 auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-}
-
-.card {
+.deck .card {
     height: 125px;
     width: 125px;
     background: #2e3d49;
@@ -82,50 +69,45 @@ h1 {
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
-.open {
+.deck .card.open {
     transform: rotateY(0);
     background: #02b3e4;
     cursor: default;
 	animation-name: flipInY;
-  -webkit-backface-visibility: visible !important;
-  backface-visibility: visible !important;
-  -webkit-animation-duration: 1s;
+   -webkit-animation-duration: 1s;
    animation-duration: 1s;
   -webkit-animation-fill-mode: both;
    animation-fill-mode: both;
 }
 
-.show {
+.deck .card.show {
     font-size: 33px;
 }
 
-.match {
+.deck .card.match {
     cursor: default;
 	animation-name: stretch;
-  -webkit-backface-visibility: visible !important;
-  backface-visibility: visible !important;
-  animation-duration: 1.5s; 
+	background: #02ccba;
+    font-size: 33px;
+    animation-duration: 1.5s; 
   animation-timing-function: ease-out; 
   animation-delay: 0;
   animation-direction: alternate;
   animation-fill-mode: forwards;
   animation-play-state: running;
-    background: #02ccba;
-    font-size: 33px;
+  
 }
-.unmatched {
-  cursor: default;
+.deck .card.unmatched {
+  background: #ff4d4d;
+  font-size: 33px;
   animation-name: figure;
-  -webkit-backface-visibility: visible !important;
-  backface-visibility: visible !important;
   animation-duration: 0.5s; 
   animation-timing-function: ease-out; 
   animation-delay: 0;
   animation-direction: alternate;
   animation-fill-mode: forwards;
   animation-play-state: running;
-  background: #ff4d4d;
-  font-size: 33px;
+  
 }
 
 .selected {
@@ -209,3 +191,45 @@ opacity: 0.9;
    
 }
 
+/**
+ * Modal
+ */
+/* The Modal (background) */
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}

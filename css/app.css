@@ -192,10 +192,7 @@ opacity: 0.9;
 }
 
 /**
- * Modal
- */
-/* The Modal (background) */
-/* The Modal (background) */
+ //* Modal*/	
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -203,7 +200,7 @@ opacity: 0.9;
     padding-top: 100px; /* Location of the box */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
+	width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
@@ -212,12 +209,17 @@ opacity: 0.9;
 
 /* Modal Content */
 .modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
+  border-radius: 8px;
+  opacity: 0.9;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);  
+  width: 400px;
+  position: relative;
+  margin: 10% auto;
+  padding: 2rem;
+  background: #fff;
+  color: rgba(0,0,0,0.2);
+  }
 
 /* The Close Button */
 .close {

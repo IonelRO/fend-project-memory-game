@@ -12,7 +12,7 @@ const deck = document.querySelector('.deck');
 
 // array for opened cards
 let openedCards = [];
-
+let moves=0;
 // declaring variable of matchedCards
 let matchedCard = document.getElementsByClassName("match");
 	
@@ -39,6 +39,7 @@ function startGame(){
             
         });
         });
+		stars();
         cards[i].classList.remove("show", "open", "match", "unmatched");
     };
     
@@ -59,12 +60,12 @@ function shuffle(array) {
     return array;
 };
 
-// @description toggles open and show class to display cards
+// @description toggles open  show and selected class to display cards
 let displayCard = function (){
     this.classList.toggle("open");
     this.classList.toggle("show");
 	this.classList.toggle("selected");
- };
+	};
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -80,6 +81,9 @@ let displayCard = function (){
 function cardOpen() {
     openedCards.push(this);
 	let number = openedCards.length;
+	//temp=document.querySelectorAll(".card");
+	//console.log(temp);
+//	number > 2? console.log(openedCards[0]):"";
 	number === 2 ? openedCards[0].innerHTML === openedCards[1].innerHTML? matched():unmatched():"";
 	};
 	// @description when cards match
@@ -90,7 +94,9 @@ function matched(){
     openedCards[1].classList.remove("show", "open", "no-event");
    	openedCards = [];
 	// @Game over,open modal 
-	matchedCard.length===16?openModal():"";
+	matchedCard.length===16? openModal():"";
+	moves++;
+	stars();
 }
 
 
@@ -107,27 +113,52 @@ function unmatched(){
       //  enable();
         openedCards = [];
     },300);
+moves++;
+stars();
+
 }
-
-
 	// @loop to add event listeners to each card
 for (var i = 0; i < cards.length; i++){
    card = cards[i];
+   
    card.addEventListener("click", displayCard);
    card.addEventListener("click", cardOpen);
    };
- 
- // Modal function
+   // @manage stars in game
+ function stars(){
+document.querySelector(".moves").textContent = `${moves}`;	
+if (moves < 25) {
+document.querySelector(".star1").classList.add("fas", "fa-star"); 
+document.querySelector(".star2").classList.add("fas", "fa-star");  
+document.querySelector(".star3").classList.add("fas", "fa-star");
+} else if (moves == 25){ 
+document.querySelector(".star3").classList.remove("fas", "fa-star");  
+document.querySelector(".star3").classList.add("far", "fa-star");
+} else if (moves == 45){ 
+document.querySelector(".star2").classList.remove("fas", "fa-star"); 
+document.querySelector(".star2").classList.add("far", "fa-star");
+console.log(moves)
+} else if (moves == 60){  
+document.querySelector(".star1").classList.remove("fas", "fa-star");  
+document.querySelector(".star1").classList.add("far", "fa-star");
+}
+	 }  ;
+   
+
+	   
+   
+  // Modal function
  
 function openModal(){
    // Get the modal
-var modal = document.getElementById('myModal');
+  const modal = document.getElementById('myModal');
+document.getElementById("moves").textContent = `You finished the game in ${moves+1} moves`;
 
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+const btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+const span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
     modal.style.display = "block";

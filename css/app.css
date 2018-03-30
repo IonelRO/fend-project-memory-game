@@ -37,9 +37,39 @@ h1 {
   display: inline-block;
   cursor: pointer;
 }
+
+/*
+ * Styles for stars
+ */
+.stars{
+	color: #FFDC00;
+	font-size: 1.2rem;
+	}
+a {
+	color: #111111;
+	text-decoration: none;
+	}
+	
+.rev:link, .rev:visited {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+	border-radius: 4px;
+}
+
+
+.rev:hover, .rev:active {
+    background-color: red;
+}
+
 /*
  * Styles for the deck of cards
  */
+
+
 
 .deck {
     width: 660px;
@@ -58,7 +88,7 @@ h1 {
 .deck .card {
     height: 125px;
     width: 125px;
-    background: #ffffff url('../img/card.png');
+    background: #DDDDDD url('../img/card.png');
 	background-repeat: repeat;
     font-size: 0;
     color: #ffffff;
@@ -211,15 +241,15 @@ opacity: 0.9;
 /* Modal Content */
 .modal-content {
   border-radius: 8px;
-  opacity: 0.9;
-    align-items: center;
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);  
-  width: 400px;
+opacity: 0.9; 	
+  align-items: center;
+  box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);  
+  width: 50%;
   position: relative;
   margin: 10% auto;
   padding: 2rem;
   background: #fff;
-  color: rgba(0,0,0,0.2);
+  color: rgb(0,0,0);
   }
 
 /* The Close Button */

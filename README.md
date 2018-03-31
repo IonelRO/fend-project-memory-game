@@ -1,6 +1,8 @@
-# Memory Game Project
+# Memory Game 
 
-## Table of Contents
+## Concentration (game show) [Vikipedia](https://en.wikipedia.org/wiki/Concentration_(game_show))
+
+*Concentration is an American television game show based on the children's memory game of the same name. Matching cards represented prizes that contestants could win. As matching pairs of cards were gradually removed from the board, it would slowly reveal elements of a rebus puzzle that contestants had to solve to win a match.
 
 * [Instructions](#instructions)
 * [Contributing](#contributing)

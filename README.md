@@ -2,21 +2,15 @@
 
 ## Concentration (game show) [Vikipedia](https://en.wikipedia.org/wiki/Concentration_(game_show))
 
-*Concentration is an American television game show based on the children's memory game of the same name. Matching cards represented prizes that contestants could win. As matching pairs of cards were gradually removed from the board, it would slowly reveal elements of a rebus puzzle that contestants had to solve to win a match.
+Concentration, also known as Match Match, Match Up, Memory, Pelmanism, Shinkei-suijaku, Pexeso or simply Pairs, is a card game in which all of the cards are laid face down on a surface and two cards are flipped face up over each turn. The object of the game is to turn over pairs of matching cards. Concentration can be played with any number of players or as solitaire. It is a particularly good game for young children, though adults may find it challenging and stimulating as well. The scheme is often used in quiz shows and can be employed as an educational game.
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+## Rules
 
-## Instructions
+Deck of playing cards containt 8 setd of cards with images. The rules given here are for a standard deck of 16 cards, which are laid face down in four rows of 4 cards each.
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+## How to play
 
-To get started, open `js/app.js` and start building out the app's functionality
+Clik pairs o 2 cards until you find all 16th pairs.
+At the end of game a modal will be opended and game stats will be dispalyed: time, number of moves and ranking.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+## Play the game here [Memory game](https://ionelro.github.io/)

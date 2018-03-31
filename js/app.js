@@ -114,13 +114,13 @@ function unmatched(){
     openedCards[1].classList.add("unmatched");
 	openedCards[0].classList.remove("show", "open", "no-event", "selected");
     openedCards[1].classList.remove("show", "open", "no-event", "selected");
-   // @disable();
+    disable();
     setTimeout(function(){
         openedCards[0].classList.remove("show", "open", "no-event","unmatched");
         openedCards[1].classList.remove("show", "open", "no-event","unmatched");
-      //  enable();
+      enable();
         openedCards = [];
-    },300);
+    },500);
 moves++;
 stars();
 
@@ -131,25 +131,45 @@ for (var i = 0; i < cards.length; i++){
    card.addEventListener("click", displayCard);
    card.addEventListener("click", cardOpen);
    };
+ 
+ function disable(){
+    Array.prototype.filter.call(cards, function(card){
+        card.classList.add('no-events');
+    });
+}  
+
+function enable(){
+    Array.prototype.filter.call(cards, function(card){
+        card.classList.remove('no-events');
+        for(var i = 0; i < matchedCard.length; i++){
+            matchedCard[i].classList.add("no-events");
+        }
+    });
+}
+ 
    // @manage stars in game
  function stars(){
 document.querySelector(".moves").textContent = `${moves}`;
 console.log(rank);	
-if (moves < 26) {
+if (moves < 25) {
 document.querySelector(".star1").classList.add("fas", "fa-star"); 
 document.querySelector(".star2").classList.add("fas", "fa-star");  
 document.querySelector(".star3").classList.add("fas", "fa-star");
-} else if (moves == 26){
+} else if (moves == 25){
 --rank;
-document.querySelector(".star3").classList.remove("fas", "fa-star");  
+}
+else if (moves == 26){
+document.querySelector(".star3").classList.remove("fas", "fa-star"); 
 document.querySelector(".star3").classList.add("far", "fa-star");
+}else if (moves == 34){
+--rank;
 } else if (moves == 35){
---rank; 
 document.querySelector(".star2").classList.remove("fas", "fa-star"); 
 document.querySelector(".star2").classList.add("far", "fa-star");
+}else if (moves == 45){
+--rank;
 } else if (moves == 46){
---rank;  
-document.querySelector(".star1").classList.remove("fas", "fa-star");  
+document.querySelector(".star1").classList.remove("fas", "fa-star"); 
 document.querySelector(".star1").classList.add("far", "fa-star");
 }
 	 }  ;

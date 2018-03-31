@@ -73,7 +73,7 @@ a {
 .deck {
     width: 660px;
     min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    background: linear-gradient(160deg, #85a2d1 0%, #f4ebec 100%);
     padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
@@ -275,27 +275,30 @@ opacity: 0.9;
 	
     .deck .card.show,
 	.deck .card.unmatched,
-	.deck .card.match,
+	.deck .card.match
 	{
-    font-size: 25px;
+    font-size: 30px;
 	}
 	
 	 .deck {
 		width: 85%;
 			
-	}
+}
+}
 
-	.deck .card {
-		height: 125px;
-		width: 125px;
-	}
-
-	}
 /* Media query for Ihone 7+ */	
 @media screen and (max-width: 414px) {
 	.container,
-	.stars {
+	.stars,
+	.card.show, {
 		font-size: 0.8em;
+	}
+	
+	.deck .card.show,
+	.deck .card.unmatched,
+	.deck .card.match
+	{
+    font-size: 20px;
 	}
 	
 	.deck {
@@ -304,6 +307,7 @@ opacity: 0.9;
 	}
 
 	.deck .card {
+		background: #DDDDDD url('../img/card75px.png');
 		height: 75px;
 		width: 75px;
 	}
@@ -314,25 +318,26 @@ opacity: 0.9;
 	}	
 	
 }
-/* Media query for Ihone 6/7 */	
-@media screen and (max-width: 376px) {
-	.container {
-		font-size: 0.8em;
+	/* Media query for Ihone 6/7 */	
+	@media screen and (max-width: 376px) {
+		.container {
+			font-size: 0.8em;
+			
+		}
 		
-	}
+		.deck {
+			width: 95%;
+			min-height: 430px;
+		}
 	
-	.deck {
-		width: 95%;
-		min-height: 430px;
+		.deck .card {
+			background: #DDDDDD url('../img/card65px.png');
+			height: 65px;
+			width: 65px;
+		}
+		.score-panel {
+		text-align: left;
+		width: 300px;
+		margin-bottom: 10px;
 	}
-
-	.deck .card {
-		height: 65px;
-		width: 65px;
 	}
-	.score-panel {
-    text-align: left;
-    width: 300px;
-    margin-bottom: 10px;
-}
-}

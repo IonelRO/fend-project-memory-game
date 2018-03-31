@@ -13,6 +13,7 @@ const deck = document.querySelector('.deck');
 // array for opened cards
 let openedCards = [];
 let moves=0;
+let rank=3;
 // declaring variable of matchedCards
 let matchedCard = document.getElementsByClassName("match");
 	
@@ -28,7 +29,8 @@ let matchedCard = document.getElementsByClassName("match");
  // @description shuffles cards when page loads
 document.body.onload = startGame();
 function startGame(){
-    // @shuffle deck
+   	started = false;
+	// @shuffle deck
     cards = shuffle(cards)};
     // @remove all exisiting classes from each card
 	 for (var i = 0; i < cards.length; i++){
@@ -79,7 +81,13 @@ let displayCard = function (){
  */
 // @description add opened cards to OpenedCards list and check if cards are match or not
 function cardOpen() {
-    openedCards.push(this);
+    if (!started) { // if started is false
+    second = 0; // reset the timer
+    minute = 0;
+    startTimer(); // start the timer
+    started = true; // started becomes true hence the timer isn't started at every click
+  }
+	openedCards.push(this);
 	let number = openedCards.length;
 	//temp=document.querySelectorAll(".card");
 	//console.log(temp);
@@ -94,7 +102,7 @@ function matched(){
     openedCards[1].classList.remove("show", "open", "no-event");
    	openedCards = [];
 	// @Game over,open modal 
-	matchedCard.length===16? openModal():"";
+	matchedCard.length===16? openModal()|| stop():"";
 	moves++;
 	stars();
 }
@@ -120,39 +128,41 @@ stars();
 	// @loop to add event listeners to each card
 for (var i = 0; i < cards.length; i++){
    card = cards[i];
-   
    card.addEventListener("click", displayCard);
    card.addEventListener("click", cardOpen);
    };
    // @manage stars in game
  function stars(){
-document.querySelector(".moves").textContent = `${moves}`;	
-if (moves < 25) {
+document.querySelector(".moves").textContent = `${moves}`;
+console.log(rank);	
+if (moves < 26) {
 document.querySelector(".star1").classList.add("fas", "fa-star"); 
 document.querySelector(".star2").classList.add("fas", "fa-star");  
 document.querySelector(".star3").classList.add("fas", "fa-star");
-} else if (moves == 25){ 
+} else if (moves == 26){
+--rank;
 document.querySelector(".star3").classList.remove("fas", "fa-star");  
 document.querySelector(".star3").classList.add("far", "fa-star");
-} else if (moves == 45){ 
+} else if (moves == 35){
+--rank; 
 document.querySelector(".star2").classList.remove("fas", "fa-star"); 
 document.querySelector(".star2").classList.add("far", "fa-star");
-console.log(moves)
-} else if (moves == 60){  
+} else if (moves == 46){
+--rank;  
 document.querySelector(".star1").classList.remove("fas", "fa-star");  
 document.querySelector(".star1").classList.add("far", "fa-star");
 }
 	 }  ;
    
-
-	   
-   
+     
   // Modal function
  
 function openModal(){
    // Get the modal
-  const modal = document.getElementById('myModal');
-document.getElementById("moves").textContent = `You finished the game in ${moves+1} moves`;
+ const modal = document.getElementById('myModal');
+document.getElementById("moves").textContent = `You finished the game in ${moves+1} moves` 
+document.getElementById("time").textContent = `Your time was ${h4.textContent} minutes`
+document.getElementById("ranking").textContent = `Your rankimg is ${rank} stars`;
 
 // Get the button that opens the modal
 const btn = document.getElementById("myBtn");
@@ -175,6 +185,35 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+}
+
+
+// @Timer script
+
+
+var h4 = document.getElementsByTagName('h4')[0],
+    seconds = 0, minutes = 0,  t;
+function startTimer(){
+function add() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+       }
+    
+    h4.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+ timer();
+    
+}
+function timer() {
+t = setTimeout(add, 1000);
+}
+
+ timer();
+}
+/* Stop timer function */
+function stop() {
+    clearTimeout(t);
 }
 
 

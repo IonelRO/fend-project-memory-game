@@ -1,239 +1,228 @@
-/*
- * Create a list that holds all of your cards
- */
-
+// @Create a list that holds all of your cards
 let cards = Array.from(document.getElementsByClassName("card"));
-console.log(cards);
 
-    
 // deck of all cards in game
 const deck = document.querySelector('.deck');
 
-
-// array for opened cards
+// @array for opened cards
 let openedCards = [];
-let moves=0;
-let rank=3;
-// declaring variable of matchedCards
+
+// @initianilize moves and rank
+let moves = 0;
+let rank = 3;
+
+// @declaring variable of matchedCards
 let matchedCard = document.getElementsByClassName("match");
-	
-/* 
- * Display the cards on the page */
- 
 
- /*   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
-*/
- // @description function to start play or when the game restart 
- // @description shuffles cards when page loads
+// @On open load start game function
 document.body.onload = startGame();
-function startGame(){
-   	started = false;
+
+// @Start game function
+function startGame() {
+	started = false;
 	// @shuffle deck
-    cards = shuffle(cards)};
-    // @remove all exisiting classes from each card
-	 for (var i = 0; i < cards.length; i++){
-            [].forEach.call(cards, function(item) {
-            deck.innerHTML = "";
-            [].forEach.call(cards, function(item) {
-            deck.appendChild(item);
-            
-        });
-        });
-		stars();
-        cards[i].classList.remove("show", "open", "match", "unmatched");
-    };
-    
- 
-
- // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
+	cards = shuffle(cards)
 };
 
-// @description toggles open  show and selected class to display cards
-let displayCard = function (){
-    this.classList.toggle("open");
-    this.classList.toggle("show");
-	this.classList.toggle("selected");
-	};
+// @remove all exisiting classes from each card
+for (var i = 0; i < cards.length; i++) {
+	[].forEach.call(cards, function (item) {
+		deck.innerHTML = "";
+		[].forEach.call(cards, function (item) {
+			deck.appendChild(item);
 
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
-// @description add opened cards to OpenedCards list and check if cards are match or not
+		});
+	});
+	stars(); // @Load srar function
+	// @initialize cards removing all classes
+	cards[i].classList.remove("show", "open", "match", "unmatched");
+};
+
+// Shuffle function from http://stackoverflow.com/a/2450976
+function shuffle(array) {
+	var currentIndex = array.length,
+		temporaryValue, randomIndex;
+
+	while (currentIndex !== 0) {
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
+		array[randomIndex] = temporaryValue;
+	}
+
+	return array;
+};
+
+// @toggles open, show and selected class to displaed cards
+let displayCard = function () {
+	this.classList.toggle("open");
+	this.classList.toggle("show");
+	this.classList.toggle("selected");
+};
+
+// @Add opened cards to OpenedCards list and check if cards are match or not
 function cardOpen() {
-    if (!started) { // if started is false
-    second = 0; // reset the timer
-    minute = 0;
-    startTimer(); // start the timer
-    started = true; // started becomes true hence the timer isn't started at every click
-  }
+	if (!started) { //@ if started is false
+		second = 0; //@ reset the timer
+		minute = 0;
+		startTimer(); //@ start the timer
+		started = true; //@ started becomes true hence the timer isn't started at every click
+	}
 	openedCards.push(this);
 	let number = openedCards.length;
-	//temp=document.querySelectorAll(".card");
-	//console.log(temp);
-//	number > 2? console.log(openedCards[0]):"";
-	number === 2 ? openedCards[0].innerHTML === openedCards[1].innerHTML? matched():unmatched():"";
-	};
-	// @description when cards match
-function matched(){
-    openedCards[0].classList.add( "selected", "match");
-    openedCards[1].classList.add("selected", "match");
-    openedCards[0].classList.remove("show", "open", "no-event");
-    openedCards[1].classList.remove("show", "open", "no-event");
-   	openedCards = [];
-	// @Game over,open modal 
-	matchedCard.length===16? openModal()|| stop():"";
-	moves++;
-	stars();
+	number === 2 ? //@ check if opened cards are macked on no 
+		openedCards[0].innerHTML === openedCards[1].innerHTML ?
+		matched() : //@ call mached function
+		unmatched() : //@ call unmached function
+		"";
+};
+
+// Function match
+function matched() {
+	//@ add selected and match classes
+	openedCards[0].classList.add("selected", "match");
+	openedCards[1].classList.add("selected", "match");
+	//@ remove show, open and no event classes
+	openedCards[0].classList.remove("show", "open", "no-event");
+	openedCards[1].classList.remove("show", "open", "no-event");
+	openedCards = [];
+	moves++; //@indexing moves
+	stars(); // @call stars function
+	// @Game over,open modal and spot timer
+	matchedCard.length === 16 ? openModal() || stop() : "";
 }
 
-
-	// @description when cards don't match
-function unmatched(){
-    openedCards[0].classList.add("unmatched");
-    openedCards[1].classList.add("unmatched");
+// @Unmatched function
+function unmatched() {
+	// @add sunmatched classe
+	openedCards[0].classList.add("unmatched");
+	openedCards[1].classList.add("unmatched");
+	// @remove show, open, no event and selected classes
 	openedCards[0].classList.remove("show", "open", "no-event", "selected");
-    openedCards[1].classList.remove("show", "open", "no-event", "selected");
-    disable();
-    setTimeout(function(){
-        openedCards[0].classList.remove("show", "open", "no-event","unmatched");
-        openedCards[1].classList.remove("show", "open", "no-event","unmatched");
-      enable();
-        openedCards = [];
-    },500);
-moves++;
-stars();
-
-}
-	// @loop to add event listeners to each card
-for (var i = 0; i < cards.length; i++){
-   card = cards[i];
-   card.addEventListener("click", displayCard);
-   card.addEventListener("click", cardOpen);
-   };
- 
- function disable(){
-    Array.prototype.filter.call(cards, function(card){
-        card.classList.add('no-events');
-    });
-}  
-
-function enable(){
-    Array.prototype.filter.call(cards, function(card){
-        card.classList.remove('no-events');
-        for(var i = 0; i < matchedCard.length; i++){
-            matchedCard[i].classList.add("no-events");
-        }
-    });
-}
- 
-   // @manage stars in game
- function stars(){
-document.querySelector(".moves").textContent = `${moves}`;
-console.log(rank);	
-if (moves < 25) {
-document.querySelector(".star1").classList.add("fas", "fa-star"); 
-document.querySelector(".star2").classList.add("fas", "fa-star");  
-document.querySelector(".star3").classList.add("fas", "fa-star");
-} else if (moves == 25){
---rank;
-}
-else if (moves == 26){
-document.querySelector(".star3").classList.remove("fas", "fa-star"); 
-document.querySelector(".star3").classList.add("far", "fa-star");
-}else if (moves == 34){
---rank;
-} else if (moves == 35){
-document.querySelector(".star2").classList.remove("fas", "fa-star"); 
-document.querySelector(".star2").classList.add("far", "fa-star");
-}else if (moves == 45){
---rank;
-} else if (moves == 46){
-document.querySelector(".star1").classList.remove("fas", "fa-star"); 
-document.querySelector(".star1").classList.add("far", "fa-star");
-}
-	 }  ;
-   
-     
-  // Modal function
- 
-function openModal(){
-   // Get the modal
- const modal = document.getElementById('myModal');
-document.getElementById("moves").textContent = `You finished the game in ${moves+1} moves` 
-document.getElementById("time").textContent = `Your time was ${h4.textContent} minutes`
-document.getElementById("ranking").textContent = `Your rankimg is ${rank} stars`;
-
-// Get the button that opens the modal
-const btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-const span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-    modal.style.display = "block";
-
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
+	openedCards[1].classList.remove("show", "open", "no-event", "selected");
+	// temporary dissable cadr cliks
+	disable();
+	// @delay for 500 ms card close
+	setTimeout(function () {
+		openedCards[0].classList.remove("show", "open", "no-event", "unmatched");
+		openedCards[1].classList.remove("show", "open", "no-event", "unmatched");
+		// enable card clicks
+		enable();
+		// @emplty opendes card array
+		openedCards = [];
+	}, 500);
+	moves++; //@indexing moves
+	stars(); // @call stars function
 }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+// @loop to add event listeners to each card
+for (var i = 0; i < cards.length; i++) {
+	card = cards[i];
+	card.addEventListener("click", displayCard);
+	card.addEventListener("click", cardOpen);
+};
+
+// @card click disable function 
+function disable() {
+	Array.prototype.filter.call(cards, function (card) {
+		card.classList.add('no-events');
+	});
 }
 
+// @card click enable function 
+function enable() {
+	Array.prototype.filter.call(cards, function (card) {
+		card.classList.remove('no-events');
+		for (var i = 0; i < matchedCard.length; i++) {
+			matchedCard[i].classList.add("no-events");
+		}
+	});
+}
+
+// @manage stars in game
+function stars() {
+	document.querySelector(".moves").textContent = `${moves}`; //@index modal with number of moves
+	if (moves < 25) { //@for moves less than 25 disply 3 stars
+		document.querySelector(".star1").classList.add("fas", "fa-star");
+		document.querySelector(".star2").classList.add("fas", "fa-star");
+		document.querySelector(".star3").classList.add("fas", "fa-star");
+	} else if (moves == 25) {
+		--rank; // after 25 moves devrement a star
+	} else if (moves == 26) { //@for moves les than 26 disply 2 stars
+		document.querySelector(".star3").classList.remove("fas", "fa-star");
+		document.querySelector(".star3").classList.add("far", "fa-star");
+	} else if (moves == 34) {
+		--rank; //@ after 34 moves devrement a star
+	} else if (moves == 35) { //@for moves les than 35 disply 1 star
+		document.querySelector(".star2").classList.remove("fas", "fa-star");
+		document.querySelector(".star2").classList.add("far", "fa-star");
+	} else if (moves == 45) {
+		--rank; // @after 45 moves devrement a star
+	} else if (moves == 46) { //@for moves les than 46 disply no stars
+		document.querySelector(".star1").classList.remove("fas", "fa-star");
+		document.querySelector(".star1").classList.add("far", "fa-star");
+	}
+};
+
+//@Modal function
+
+function openModal() {
+	// @Get the modal
+	const modal = document.getElementById('myModal');
+	document.getElementById("moves").textContent = `You finished the game in ${moves+1} moves`
+	document.getElementById("time").textContent = `Your time was ${h4.textContent} minutes`
+	document.getElementById("ranking").textContent = `Your ranking is ${rank} stars`;
+
+	// @Get the button that opens the modal
+	const btn = document.getElementById("myBtn");
+
+	// @Get the <span> element that closes the modal
+	const span = document.getElementsByClassName("close")[0];
+
+	// @When the user clicks the button, open the modal 
+	modal.style.display = "block";
+
+	// @When the user clicks on <span> (x), close the modal
+	span.onclick = function () {
+		modal.style.display = "none";
+	}
+
+	// @When the user clicks anywhere outside of the modal, close it
+	window.onclick = function (event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+}
 
 // @Timer script
-
-
 var h4 = document.getElementsByTagName('h4')[0],
-    seconds = 0, minutes = 0,  t;
-function startTimer(){
-function add() {
-    seconds++;
-    if (seconds >= 60) {
-        seconds = 0;
-        minutes++;
-       }
-    
-    h4.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
- timer();
-    
-}
-function timer() {
-t = setTimeout(add, 1000);
+	seconds = 0,
+	minutes = 0,
+	t; // initialize time on html
+// @ function start timer
+function startTimer() {
+	function add() {
+		seconds++;
+		if (seconds >= 60) {
+			seconds = 0;
+			minutes++;
+		}
+
+		h4.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+		timer();
+
+	}
+
+	function timer() {
+		t = setTimeout(add, 1000);
+	}
+
+	timer();
 }
 
- timer();
-}
-/* Stop timer function */
+// Stop timer function
 function stop() {
-    clearTimeout(t);
+	clearTimeout(t);
 }
-
-

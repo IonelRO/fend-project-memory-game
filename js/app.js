@@ -63,12 +63,6 @@ let displayCard = function () {
 
 // @Add opened cards to OpenedCards list and check if cards are match or not
 function cardOpen() {
-	if (!started) { //@ if started is false
-		second = 0; //@ reset the timer
-		minute = 0;
-		startTimer(); //@ start the timer
-		started = true; //@ started becomes true hence the timer isn't started at every click
-	}
 	openedCards.push(this);
 	let number = openedCards.length;
 	number === 2 ? //@ check if opened cards are macked on no 
@@ -121,6 +115,7 @@ for (var i = 0; i < cards.length; i++) {
 	card = cards[i];
 	card.addEventListener("click", displayCard);
 	card.addEventListener("click", cardOpen);
+	card.addEventListener("click", startTimer);
 };
 
 // @card click disable function 
@@ -148,20 +143,15 @@ function stars() {
 		document.querySelector(".star2").classList.add("fas", "fa-star");
 		document.querySelector(".star3").classList.add("fas", "fa-star");
 	} else if (moves == 25) {
-		--rank; // after 25 moves devrement a star
+		--rank; // after 25 moves decrement a star
 	} else if (moves == 26) { //@for moves les than 26 disply 2 stars
 		document.querySelector(".star3").classList.remove("fas", "fa-star");
 		document.querySelector(".star3").classList.add("far", "fa-star");
-	} else if (moves == 34) {
-		--rank; //@ after 34 moves devrement a star
-	} else if (moves == 35) { //@for moves les than 35 disply 1 star
+	} else if (moves == 44) {
+		--rank; //@ after 34 moves decrement a star
+	} else if (moves == 45) { //@for moves les than 35 disply 1 star
 		document.querySelector(".star2").classList.remove("fas", "fa-star");
 		document.querySelector(".star2").classList.add("far", "fa-star");
-	} else if (moves == 45) {
-		--rank; // @after 45 moves devrement a star
-	} else if (moves == 46) { //@for moves les than 46 disply no stars
-		document.querySelector(".star1").classList.remove("fas", "fa-star");
-		document.querySelector(".star1").classList.add("far", "fa-star");
 	}
 };
 
@@ -170,7 +160,7 @@ function stars() {
 function openModal() {
 	// @Get the modal
 	const modal = document.getElementById('myModal');
-	document.getElementById("moves").textContent = `You finished the game in ${moves+1} moves`
+	document.getElementById("moves").textContent = `You finished the game in ${moves} moves`
 	document.getElementById("time").textContent = `Your time was ${h4.textContent} minutes`
 	document.getElementById("ranking").textContent = `Your ranking is ${rank} stars`;
 
@@ -189,12 +179,21 @@ function openModal() {
 	}
 
 	// @When the user clicks anywhere outside of the modal, close it
-	window.onclick = function (event) {
+	window.addEventListener("click", closed);
+	function closed(event) {
 		if (event.target == modal) {
 			modal.style.display = "none";
 		}
 	}
 }
+
+//window.onclick = function (event) {
+//		if (event.target == modal) {
+//			modal.style.display = "none";
+//		}
+//	}
+
+
 
 // @Timer script
 var h4 = document.getElementsByTagName('h4')[0],
@@ -202,7 +201,11 @@ var h4 = document.getElementsByTagName('h4')[0],
 	minutes = 0,
 	t; // initialize time on html
 // @ function start timer
-function startTimer() {
+function startTimer() { 
+	Array.prototype.filter.call(cards, function (card) { // remove event listener starttimer for each card
+			card.removeEventListener('click', startTimer);
+
+		});
 	function add() {
 		seconds++;
 		if (seconds >= 60) {
@@ -221,6 +224,7 @@ function startTimer() {
 
 	timer();
 }
+
 
 // Stop timer function
 function stop() {

@@ -162,7 +162,7 @@ function openModal() {
 	const modal = document.getElementById('myModal');
 	document.getElementById("moves").textContent = `You finished the game in ${moves} moves`
 	document.getElementById("time").textContent = `Your time was ${h4.textContent} minutes`
-	document.getElementById("ranking").textContent = `Your ranking is ${rank} stars`;
+	document.getElementById("ranking").textContent = `Your ranking is ${rank} ${rank=1? "star":"stars"}`;
 
 	// @Get the button that opens the modal
 	const btn = document.getElementById("myBtn");
